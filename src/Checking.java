@@ -1,5 +1,5 @@
 
-public class Checking {
+public class Checking implements iAccount {
 	
 	public InterestAccount _iacct;
 	public InterestAccount getIacct() {

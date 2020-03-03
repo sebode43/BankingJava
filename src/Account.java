@@ -1,5 +1,5 @@
 
-public abstract class Account {
+public abstract class Account implements iAccount {
 
 	public double _balance;
 	public int _acctNbr;

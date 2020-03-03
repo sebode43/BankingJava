@@ -7,6 +7,7 @@ public class Program {
 		Checking chk1 = new Checking();
 		chk1.deposit(100);
 		chk1.withdraw(75);
+		System.out.println(chk1);
 		
 		Savings sav1 = new Savings();
 		sav1.deposit(100);
@@ -17,13 +18,11 @@ public class Program {
 		sav2.withdraw(75);
 		sav2.calculateInterest(3);
 		
-		ArrayList<Account> accounts = new ArrayList<Account>();
+		ArrayList<iAccount> accounts = new ArrayList<iAccount>();
 		accounts.add(sav1);
 		accounts.add(sav2);
-		for(Account a : accounts){
-			String statement = String.format("%b",  a.getBalance());
-			System.out.println(statement);
-		}
+		accounts.add(chk1);
+		
 		
 		chk1.transfer(25, sav1);
 		

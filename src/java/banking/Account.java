@@ -1,9 +1,10 @@
+package java.banking;
 
-public abstract class Account implements iAccount {
+public class Account implements iAccount { //implements instead of extends for interfaces
 
-	public double _balance;
-	public int _acctNbr;
-	public String _description;
+	private double _balance; //put _ for variables that are parameters
+	private int _acctNbr;
+	private String _description;
 	
 	public double getBalance() {
 		return _balance;
@@ -42,23 +43,20 @@ public abstract class Account implements iAccount {
 		this(0, description);
 	}
 	public Account() {
-		this(null);
+		this("Account");
 	}
 	public boolean isAmountGTZero(double amount) {
-		return(amount <= 0) ? false : true;
+		return amount > 0;
 	}
 	private boolean isSufficentFunds(double amount) {
-		if(getBalance() >= amount) {
-		return true;
+		return _balance >= amount;
 	}
-		setAttemptToOverdraw(getAttemptToOverdraw() + 1);
-	return false;
-	}
-	public void deposit(double amount) {
-		if(isAmountGTZero(amount)) {
+	
+	public boolean deposit(double amount) {
+			isAmountGTZero(amount);
 			setBalance(getBalance() + amount);
+			return true;
 		}
-	}
 	public boolean withdraw(double amount) {
 		if(isAmountGTZero(amount) && isSufficentFunds(amount)) {
 			setBalance(getBalance() - amount);
@@ -66,13 +64,15 @@ public abstract class Account implements iAccount {
 		}
 		return false;
 	}
-	public void transfer(double amount, Account toAccount) {
+	public boolean transfer(double amount, Account toAccount) {
 		if(this.withdraw(amount)) {
-			toAccount.deposit(amount);
+			return false;
 		}
+			toAccount.deposit(amount);
+			return true;
 	}
 	
-	@Override //annotation
+	@Override //annotation (like attributes in C#)
 	public String toString() {
 		return String.format("%-9.2d, %b", _description, _balance );
 	}
